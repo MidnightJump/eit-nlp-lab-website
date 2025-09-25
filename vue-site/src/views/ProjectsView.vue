@@ -18,6 +18,13 @@ const citationImages = ref([
   new URL('../assets/images/citations/2309_16289.jpg', import.meta.url).href
 ])
 
+// B 容器走马灯视频资源（来自 @/assets/movies）
+const carouselVideos = ref([
+  new URL('../assets/movies/test1.mp4', import.meta.url).href,
+  new URL('../assets/movies/test2.mp4', import.meta.url).href,
+  new URL('../assets/movies/test3.mp4', import.meta.url).href,
+])
+
 // 图片模态框
 const imageModalVisible = ref(false)
 const currentImage = ref('')
@@ -25,6 +32,12 @@ const currentImage = ref('')
 // 视频播放控制
 const isVideoPlaying = ref(false)
 const mainVideo = ref(null)
+/**
+ * 说明：本组件统一使用 @/assets/movies 下的视频资源
+ * - 物理路径：src/assets/movies
+ * - Vite 中 @ 指向 src，因此等价于 @/assets/movies
+ * - 这里通过 new URL 的方式构造资源路径，确保构建产物也能正确引用
+ */
 const videoSrc = new URL('../assets/movies/test1.mp4', import.meta.url).href
 
 // 打开图片模态框
@@ -76,7 +89,13 @@ onMounted(async () => {
       <!-- A容器 - 项目列表 -->
       <section class="a-container">
         <div class="container-header">
-          <h2>Vivid -- 项目名称</h2>
+          <!-- 组合标题：左侧黑到紫的渐变效果，分词可单独控制 -->
+          <h2 class="title-composed">
+            <span class="title-left">Vivid&nbsp;--&nbsp;项目名称</span>
+            <!-- <span class="title-sep">&nbsp;--&nbsp;</span>
+            <span class="title-right">项目名称</span> -->
+          </h2>
+          <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p>
         </div>
       </section>
       <!-- B容器 - 引用图片展示区 -->
@@ -84,32 +103,30 @@ onMounted(async () => {
         <div class="container-header">
           <h2>标题 -- 短视频滑动区</h2>
         </div>
-        <div class="container-content">
-          <el-carousel 
-            :interval="4000" 
-            type="card" 
-            height="579px"
-            indicator-position="outside"
-            arrow="hover"
-          >
-            <el-carousel-item
-              v-for="(img, idx) in citationImages"
-              :key="img"
+          <div class="container-content">
+            <el-carousel 
+              :interval="4000" 
+              type="card" 
+              height="480px"
+              indicator-position="outside"
+              arrow="hover"
             >
-              <div class="citation-image-container">
-                <img 
-                  :src="img" 
-                  class="citation-image" 
-                  :alt="'引用图片'+(idx+1)"
-                  @click="openImageModal(img)"
-                />
-                <div class="image-overlay">
-                  <span class="image-title">引用图片 {{ idx + 1 }}</span>
+              <el-carousel-item
+                v-for="(vid, idx) in carouselVideos"
+                :key="vid"
+              >
+                <div class="carousel-video-item">
+                  <div class="video-wrapper">
+                    <video 
+                      :src="vid"
+                      controls
+                      playsinline
+                    ></video>
+                  </div>
                 </div>
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
       </section>
 
 
@@ -122,7 +139,9 @@ onMounted(async () => {
         <div class="container-content">
           <div class="content-layout">
             <div class="container-content-description">
-              <p>这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。</p>
+              <p>
+                这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
+              </p>
             </div>
             <div class="container-content-video">
               <div class="video-wrapper">
@@ -198,6 +217,42 @@ onMounted(async () => {
   .container-header{
     padding: 0 0 0 0;
     background: none;
+    /* 组合标题样式 */
+    .title-composed {
+      font-size: 36px;
+      font-weight: 800;
+      margin: 0;
+      text-align: left;
+      font-family: "PingFang SC", sans-serif;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding-left: 88px;
+      height: 540px;
+  
+    }
+    .title-left,
+    .title-right {
+      background: linear-gradient(90deg, #000000 0%, #9747FF 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+    .title-sep {
+      color: #7a7a7a;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    p {
+      font-size: 16px;
+      line-height: 32px;
+      color: #333;
+      margin: 0;
+      text-align: justify;
+      padding-left: 88px;
+    }
   }
 }
 .b-container{
@@ -208,6 +263,14 @@ onMounted(async () => {
   .container-header{
     padding: 0 0 0 0;
     background: none;
+  }
+  .carousel-video-item { height: 100%; }
+  .video-wrapper { height: 579px; }      /* 改成你需要的高度 */
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;                  /* 保持比例，完整显示 */
   }
 }
 
@@ -324,6 +387,11 @@ onMounted(async () => {
       opacity: 1;
     }
   }
+}
+
+.carousel-video-item {
+  width: 100%;
+  height: 100%;
 }
 
 .citation-image {
