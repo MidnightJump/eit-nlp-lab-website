@@ -133,12 +133,13 @@ onMounted(async () => {
 
       <!-- C容器 - 额外内容区 -->
       <section class="c-container">
-        <div class="container-header">
+        <!-- <div class="container-header">
           <h2>标题 -- 主链路完整系统功能介绍</h2>
-        </div>
+        </div> -->
         <div class="container-content">
           <div class="content-layout">
             <div class="container-content-description">
+              <h2>标题 -- 主链路完整系统功能介绍</h2>
               <p>
                 这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
               </p>
@@ -192,7 +193,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 .projects-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
 }
@@ -219,16 +220,19 @@ onMounted(async () => {
     background: none;
     /* 组合标题样式 */
     .title-composed {
-      font-size: 36px;
-      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-style: bold;
+      font-size: 60px;
+      line-height: 100%;
+      letter-spacing: 0;
       margin: 0;
       text-align: left;
-      font-family: "PingFang SC", sans-serif;
       display: flex;
       align-items: flex-end;
       gap: 8px;
       padding-left: 88px;
-      height: 540px;
+      height: 520px;
   
     }
     .title-left,
@@ -239,6 +243,7 @@ onMounted(async () => {
       color: transparent;
       -webkit-text-fill-color: transparent;
       line-height: 1.2;
+      margin-bottom: 24px;
     }
     .title-sep {
       color: #7a7a7a;
@@ -246,12 +251,19 @@ onMounted(async () => {
       line-height: 1.2;
     }
     p {
-      font-size: 16px;
-      line-height: 32px;
-      color: #333;
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 100%;
+      letter-spacing: 0;
+      color: #656565;
       margin: 0;
       text-align: justify;
       padding-left: 88px;
+      padding-bottom: 45px;
+      width: 40%;
+      line-height: 150%;
     }
   }
 }
@@ -263,6 +275,18 @@ onMounted(async () => {
   .container-header{
     padding: 0 0 0 0;
     background: none;
+    margin-left: 88px;
+    h2 {    
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 50px !important;
+    line-height: 100%;
+    letter-spacing: 0;
+    margin-top: 90px;
+    margin-bottom: 55px;
+    /* leading-trim: NONE;  CSS暂不支持leading-trim，忽略 */
+    }
   }
   .carousel-video-item { height: 100%; }
   .video-wrapper { height: 579px; }      /* 改成你需要的高度 */
@@ -280,14 +304,86 @@ onMounted(async () => {
   padding: 0 0 0 0;
   background: #fff;
   
-  .container-header{
-    padding: 0 0 0 0;
-    background: none;
-  }
+  // .container-header{
+  //   padding: 0 0 0 0;
+  //   background: none;
+  //   margin-left: 88px;
+  //   h2 {    
+  //     font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  //     font-weight: 500;
+  //     font-style: normal;
+  //     font-size: 50px !important;
+  //     line-height: 100%;
+  //     letter-spacing: 0;
+  //     margin-top: 90px;
+  //     margin-bottom: 55px;
+  //     /* leading-trim: NONE;  CSS暂不支持leading-trim，忽略 */
+  //   }
+  // }
   
   .container-content {
     height: 100%;
-    padding: 0;
+    // padding-left:88px;
+    .content-layout{
+      .container-content-description{
+        // margin-left: 88px;
+        h2 {    
+          font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+          font-weight: 500;
+          font-style: normal;
+          font-size: 50px !important;
+          line-height: 100%;
+          letter-spacing: 0;
+          margin-top: 0px;
+          margin-bottom: 65px;
+          height:100%;
+          flex: 4;
+          padding: 30px 0px 55px 0px;
+                  
+          /* leading-trim: NONE;  CSS暂不支持leading-trim，忽略 */
+        }
+        p{
+          font-family: 'PingFang SC', sans-serif;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 28px;
+          /* leading-trim: NONE;  CSS暂不支持leading-trim，忽略 */
+          line-height: 50px;
+          letter-spacing: 0;
+          color: #656565;
+          margin: 0;
+          text-align: justify;
+          
+        }
+      }
+      .container-content-video {
+        flex: 6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // padding: 20px;
+        margin-top: 100px;
+        .video-wrapper {
+          position: relative;
+          width: 100%;
+          height: 527px;
+          padding-bottom:100px;
+          
+          video {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            background: #000;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+
   }
   
   .content-layout {
@@ -298,15 +394,7 @@ onMounted(async () => {
   
   .container-content-description{
     flex: 4;
-    padding: 55px 100px 88px 133px;
-    
-    p {
-      font-size: 16px;
-      line-height: 32px;
-      color: #333;
-      margin: 0;
-      text-align: justify;
-    }
+    padding: 0px 100px 88px 88px;
   }
   
   .container-content-video {
@@ -314,13 +402,13 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
   }
   
   .video-wrapper {
     position: relative;
     width: 100%;
     height: 527px;
+    padding-bottom:100px;
     
     video {
       width: 100%;
@@ -518,11 +606,11 @@ onMounted(async () => {
       height: auto;
     }
     
-    .container-content-description {
-      flex: none;
-      padding: 30px 20px;
-      width: 100%;
-    }
+    // .container-content-description {
+    //   flex: none;
+    //   padding: 30px 20px;
+    //   width: 100%;
+    // }
     
     .container-content-video {
       flex: none;
