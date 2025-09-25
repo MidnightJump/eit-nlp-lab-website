@@ -134,13 +134,12 @@ section {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 24px;
   margin-bottom: 1rem;
   text-align: center;
   color: var(--text);
-  font-family: var(--heading);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 33.6px;
 }
 
 h2 {
@@ -150,6 +149,7 @@ h2 {
   font-weight: 600;
   line-height: 1.3;
   border-bottom: 1px solid #e0e0e0;
+  margin:20px 0px 20px 0px;
 }
 
 p {
@@ -178,7 +178,8 @@ p {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  padding: 2rem 0;
+  // padding: 2rem 0;
+  padding-top: 0px;
   margin-bottom: 2rem;
   
   h1 {

@@ -44,9 +44,13 @@ onMounted(async () => {
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: 24px;
+  margin-bottom: 1rem;
   text-align: center;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 36px;
+  // border-bottom: 1px solid #e0e0e0;
 }
 
 .papers-list {

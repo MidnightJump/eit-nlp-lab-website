@@ -130,13 +130,12 @@ section {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 24px;
   margin-bottom: 1rem;
   text-align: center;
   color: var(--text);
-  font-weight: 600;
-  line-height: 1.3;
-  border-bottom: 1px solid #e0e0e0;
+  font-weight: 400;
+  line-height: 36px;
 }
 
 h2 {
@@ -146,6 +145,7 @@ h2 {
   font-weight: 600;
   line-height: 1.3;
   border-bottom: 1px solid #e0e0e0;
+  margin:20px 0px 20px 0px;
 }
 
 h3 {
@@ -203,14 +203,16 @@ ul {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  padding: 2rem 0;
+  padding: 0 0 0 0;
   margin-bottom: 2rem;
   
   h1 {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    font-size: 24px;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text);
     font-weight: 400;
-    line-height: 28px;
+    line-height: 36px;
   }
   
   p {
@@ -305,10 +307,7 @@ ul {
     padding: 1rem;
   }
   
-  h1 {
-    font-size: 2rem;
-    font-weight: 400;
-  }
+
   
   h2 {
     font-size: 1.5rem;

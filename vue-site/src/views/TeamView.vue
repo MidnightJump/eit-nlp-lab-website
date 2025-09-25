@@ -151,9 +151,12 @@
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  font-size: 24px;
+  margin-bottom: 1rem;
   text-align: center;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 36px;
   
   i {
     margin-right: 0.5rem;
@@ -161,14 +164,21 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
-  margin: 3rem 0 1.5rem;
-  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.3;
+  border-bottom: 1px solid #e0e0e0;
+  margin:20px 0px 20px 0px;
 }
 
 h3 {
-  font-size: 1.5rem;
-  margin: 1.5rem 0 1rem;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .intro {
