@@ -2,7 +2,8 @@
 import { ref, onMounted } from 'vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import { getProjects } from '../data/projects'
-
+import { ElButton } from 'element-plus'
+import { VideoPlay, VideoPause } from '@element-plus/icons-vue'
 const projects = ref([])
 const moreProjects = ref([])
 
@@ -21,10 +22,44 @@ const citationImages = ref([
 const imageModalVisible = ref(false)
 const currentImage = ref('')
 
+// 视频播放控制
+const isVideoPlaying = ref(false)
+const mainVideo = ref(null)
+const videoSrc = new URL('../assets/movies/test1.mp4', import.meta.url).href
+
 // 打开图片模态框
 const openImageModal = (imageSrc) => {
   currentImage.value = imageSrc
   imageModalVisible.value = true
+}
+
+// 切换视频播放状态
+const toggleVideo = () => {
+  if (mainVideo.value) {
+    const video = mainVideo.value
+    try {
+      if (video.paused) {
+        const p = video.play()
+        if (p && typeof p.then === 'function') {
+          p.then(() => { isVideoPlaying.value = true }).catch((e) => {
+            console.error('视频播放失败:', e)
+          })
+        } else {
+          isVideoPlaying.value = true
+        }
+      } else {
+        video.pause()
+        isVideoPlaying.value = false
+      }
+    } catch (e) {
+      console.error('切换播放状态出错:', e)
+    }
+  }
+}
+
+// 视频播放结束
+const onVideoEnded = () => {
+  isVideoPlaying.value = false
 }
 
 onMounted(async () => {
@@ -38,45 +73,22 @@ onMounted(async () => {
 
     <!-- 主容器 -->
     <main class="main-container">
-            <!-- B容器 - 项目列表 -->
-      <section class="b-container">
-        <div class="container-header">
-          <h2>项目列表</h2>
-          <p>我们的研究项目和创新成果</p>
-        </div>
-        <div class="container-content">
-          <div class="projects-grid">
-            <div 
-              v-for="project in projects" 
-              :key="project.id" 
-              class="project-card"
-            >
-              <h3>{{ project.title }}</h3>
-              <p>{{ project.description }}</p>
-              <div class="project-tags">
-                <span 
-                  v-for="tag in project.tags" 
-                  :key="tag" 
-                  class="tag"
-                >
-                  {{ tag }}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- A容器 - 引用图片展示区 -->
+      <!-- A容器 - 项目列表 -->
       <section class="a-container">
         <div class="container-header">
-          <h2>研究引用展示</h2>
-          <p>我们的研究成果和学术引用</p>
+          <h2>Vivid -- 项目名称</h2>
+        </div>
+      </section>
+      <!-- B容器 - 引用图片展示区 -->
+      <section class="b-container">
+        <div class="container-header">
+          <h2>标题 -- 短视频滑动区</h2>
         </div>
         <div class="container-content">
           <el-carousel 
             :interval="4000" 
             type="card" 
-            height="400px"
+            height="579px"
             indicator-position="outside"
             arrow="hover"
           >
@@ -105,50 +117,38 @@ onMounted(async () => {
       <!-- C容器 - 额外内容区 -->
       <section class="c-container">
         <div class="container-header">
-          <h2>更多信息</h2>
-          <p>了解更多关于我们的研究</p>
+          <h2>标题 -- 主链路完整系统功能介绍</h2>
         </div>
         <div class="container-content">
-          <div class="info-cards">
-            <div class="info-card">
-              <div class="card-icon">
-                <el-icon size="2rem"><Document /></el-icon>
-              </div>
-              <h3>学术论文</h3>
-              <p>查看我们发表的最新学术论文和研究成果</p>
+          <div class="content-layout">
+            <div class="container-content-description">
+              <p>这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。</p>
             </div>
-            <div class="info-card">
-              <div class="card-icon">
-                <el-icon size="2rem"><Trophy /></el-icon>
+            <div class="container-content-video">
+              <div class="video-wrapper">
+                <video 
+                  ref="mainVideo"
+                  :src="videoSrc"
+                  playsinline
+                  @click="toggleVideo"
+                  @ended="onVideoEnded"
+                ></video>
+                <el-button
+                  class="custom-play-button"
+                  type="primary"
+                  circle
+                  @click.stop="toggleVideo"
+                >
+                  <el-icon :size="56">
+                    <component :is="isVideoPlaying ? VideoPause : VideoPlay" />
+                  </el-icon>
+                </el-button>
               </div>
-              <h3>获奖情况</h3>
-              <p>了解我们在各个领域获得的奖项和荣誉</p>
-            </div>
-            <div class="info-card">
-              <div class="card-icon">
-                <el-icon size="2rem"><Connection /></el-icon>
-              </div>
-              <h3>合作交流</h3>
-              <p>与国内外知名机构和企业建立合作关系</p>
             </div>
           </div>
         </div>
       </section>
     </main>
-
-    <!-- 页脚 -->
-    <!-- <footer class="page-footer">
-      <div class="footer-content">
-        <p>&copy; 2025 EIT-NLP 课题组. 保留所有权利.</p>
-        <div class="footer-links">
-          <a href="/sys/">首页</a>
-          <a href="/sys/research">研究</a>
-          <a href="/sys/team">团队</a>
-          <a href="/sys/hiring">招聘</a>
-          <a href="/sys/projects">项目</a>
-        </div>
-      </div>
-    </footer> -->
     
     <!-- 图片模态框 -->
     <el-dialog
@@ -178,162 +178,135 @@ onMounted(async () => {
   flex-direction: column;
 }
 
-// 页眉样式
-.page-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 80px 20px 60px;
-  text-align: center;
-  
-  .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      font-family: "PingFang SC", sans-serif;
-      font-weight: 600;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    
-    p {
-      font-size: 1.3rem;
-      margin: 0;
-      opacity: 0.9;
-    }
-  }
-}
 
 // 主容器样式
 .main-container {
   flex: 1;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 40px 20px;
+  // padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 90px;
 }
 
-// 通用容器样式
-.a-container,
-.b-container,
-.c-container {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+.a-container{
+  width:100%;
+  height: 620px;
+  padding: 0 0 0 0;
+  background: #fff;
+  .container-header{
+    padding: 0 0 0 0;
+    background: none;
+  }
+}
+.b-container{
+  width:100%;
+  height: auto;
+  padding: 0 0 0 0;
+  background: #fff;
+  .container-header{
+    padding: 0 0 0 0;
+    background: none;
   }
 }
 
-// 容器头部样式
-.container-header {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 30px;
-  border-bottom: 1px solid #e9ecef;
+.c-container{
+  width:100%;
+  height: auto;
+  padding: 0 0 0 0;
+  background: #fff;
   
-  h2 {
-    font-size: 1.8rem;
-    color: #1D1D1F;
-    margin-bottom: 0.5rem;
-    font-family: "PingFang SC", sans-serif;
-    font-weight: 600;
+  .container-header{
+    padding: 0 0 0 0;
+    background: none;
   }
   
-  p {
-    color: #666;
-    margin: 0;
-    font-size: 1rem;
+  .container-content {
+    height: 100%;
+    padding: 0;
   }
-}
-
-// 容器内容样式
-.container-content {
-  padding: 30px;
-}
-
-// 页脚样式
-.page-footer {
-  background: #2c3e50;
-  color: white;
-  padding: 40px 20px;
-  margin-top: auto;
   
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
+  .content-layout {
     display: flex;
-    justify-content: space-between;
+    height: 100%;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
+  }
+  
+  .container-content-description{
+    flex: 4;
+    padding: 55px 100px 88px 133px;
     
     p {
+      font-size: 16px;
+      line-height: 32px;
+      color: #333;
       margin: 0;
-      opacity: 0.8;
+      text-align: justify;
+    }
+  }
+  
+  .container-content-video {
+    flex: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 527px;
+    
+    video {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      background: #000;
+      cursor: pointer;
+    }
+  }
+  
+  .custom-play-button {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    // background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    --el-button-bg-color: transparent;
+    --el-button-hover-bg-color: transparent;
+    --el-button-active-bg-color: transparent;
+    --el-button-border-color: transparent;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    
+    &:hover {
+      background: transparent;
+      transform: scale(1.05);
     }
     
-    .footer-links {
-      display: flex;
-      gap: 30px;
-      
-      a {
-        color: white;
-        text-decoration: none;
-        opacity: 0.8;
-        transition: opacity 0.3s ease;
-        
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
+    // .el-icon {
+    //   font-size: 22px;
+    // }
   }
 }
 
-// C容器 - 信息卡片样式
-.info-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
 
-.info-card {
-  text-align: center;
-  padding: 30px 20px;
-  background: #f8f9fa;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: #e9ecef;
-    transform: translateY(-5px);
-  }
-  
-  .card-icon {
-    color: var(--primary);
-    margin-bottom: 20px;
-  }
-  
-  h3 {
-    font-size: 1.3rem;
-    color: #1D1D1F;
-    margin-bottom: 15px;
-    font-family: "PingFang SC", sans-serif;
-  }
-  
-  p {
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
-  }
-}
+
+
 
 .citation-image-container {
   position: relative;
@@ -459,65 +432,37 @@ onMounted(async () => {
 
 // 响应式设计
 @media (max-width: 768px) {
-  .page-header {
-    padding: 60px 15px 40px;
-    
-    .header-content {
-      h1 {
-        font-size: 2.2rem;
-      }
-      
-      p {
-        font-size: 1.1rem;
-      }
-    }
-  }
-  
   .main-container {
     padding: 20px 15px;
     gap: 30px;
   }
   
-  .container-header {
-    padding: 20px;
-    
-    h2 {
-      font-size: 1.5rem;
-    }
+  .a-container,
+  .b-container,
+  .c-container {
+    height: auto;
+    min-height: 400px;
   }
   
-  .container-content {
-    padding: 20px;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .project-card {
-    padding: 1.5rem;
-    
-    h3 {
-      font-size: 1.2rem;
-    }
-  }
-  
-  .info-cards {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .page-footer {
-    padding: 30px 15px;
-    
-    .footer-content {
+  .c-container {
+    .content-layout {
       flex-direction: column;
-      text-align: center;
-      gap: 15px;
+      height: auto;
+    }
+    
+    .container-content-description {
+      flex: none;
+      padding: 30px 20px;
+      width: 100%;
+    }
+    
+    .container-content-video {
+      flex: none;
+      padding: 20px;
+      width: 100%;
       
-      .footer-links {
-        gap: 20px;
+      video {
+        height: 250px;
       }
     }
   }
