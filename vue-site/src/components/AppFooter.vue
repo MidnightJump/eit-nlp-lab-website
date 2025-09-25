@@ -5,7 +5,7 @@
     :data-dark="isDark"
     data-size="wide"
   >
-    <div>
+    <!-- <div>
       <a 
         v-for="(link, key) in socialLinks" 
         :key="key"
@@ -16,7 +16,7 @@
       >
         <i :class="`fab fa-${key}`"></i>
       </a>
-    </div>
+    </div> -->
 
     <div>
       &copy; {{ currentYear }}
@@ -27,14 +27,14 @@
       </a>
     </div>
 
-    <input
+    <!-- <input
       type="checkbox"
       class="dark-toggle"
       data-tooltip="Dark mode"
       aria-label="toggle dark mode"
       v-model="darkMode"
       @change="toggleDarkMode"
-    >
+    > -->
   </footer>
 </template>
 

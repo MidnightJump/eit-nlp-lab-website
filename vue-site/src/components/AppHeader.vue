@@ -54,9 +54,8 @@ const navPages = [
   { path: '/', title: '首页', tooltip: '主页' },
   { path: '/research', title: '研究', tooltip: '研究项目与成果' },
   { path: '/team', title: '团队', tooltip: '课题组成员' },
+  { path: '/hiring', title: '招聘', tooltip: '招聘信息' },
   { path: '/projects', title: '项目', tooltip: '查看项目' },
-  { path: '/blog', title: '博客', tooltip: '博客文章' },
-  { path: '/contact', title: '联系', tooltip: '联系我们' }
 ]
 </script>
 

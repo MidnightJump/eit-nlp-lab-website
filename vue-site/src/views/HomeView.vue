@@ -12,13 +12,44 @@
     </section>
 
     <section class="news-section">
-      <h2>新闻</h2>
-      <div class="citations-list">
-        <Citation 
+      <h2 class="news-section-title">新闻</h2>
+      
+      <div class="news-section-list">
+        <div 
           v-for="paper in featuredPapers" 
           :key="paper.id" 
-          :citation="paper" 
-        />
+          class="citation-container"
+        >
+          <div class="citation">
+            <div class="citation-text">
+              <i class="icon fa-solid fa-scroll"></i>
+              
+              <a 
+                v-if="paper.link" 
+                :href="paper.link" 
+                class="citation-title"
+                target="_blank"
+              >
+                {{ paper.title }}
+              </a>
+              <span v-else class="citation-title">{{ paper.title }}</span>
+              
+              <div class="citation-authors" tabindex="0">
+                {{ paper.authors.join(', ') }}
+              </div>
+              
+              <div class="citation-details">
+                <span v-if="paper.publisher" class="citation-publisher">{{ paper.publisher }}</span>
+                <span v-if="paper.publisher && paper.date">&nbsp;·&nbsp;</span>
+                <span v-if="paper.date" class="citation-date">{{ paper.date }}</span>
+                <span v-if="paper.link && paper.link.includes('arxiv')" class="citation-space">&nbsp;·&nbsp;</span>
+                <span v-if="paper.link && paper.link.includes('arxiv')" class="citation-id">arxiv:{{ paper.link.split('/').pop() }}</span>
+                <span v-if="!paper.link || !paper.link.includes('arxiv')">&nbsp;·&nbsp;</span>
+                <span v-if="!paper.link || !paper.link.includes('arxiv')" class="citation-id">/</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -65,7 +96,7 @@
         <a 
           href="https://github.com/eit-nlp" 
           target="_blank" 
-          style="display: inline-block; padding: 10px 20px; border: 2px solid #007acc; border-radius: 5px; text-decoration: none; color: #007acc; font-weight: bold; text-transform: uppercase; white-space: nowrap;"
+          class="github-button"
         >
           VISIT OUR GITHUB
         </a>
@@ -76,7 +107,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import Citation from '../components/Citation.vue'
 import { getFeaturedPapers } from '../data/papers'
 
 const featuredPapers = ref([])
@@ -92,30 +122,236 @@ onMounted(async () => {
   margin: 0 auto;
   padding: 2rem;
 }
-
+* {
+  font-family: "PingFang SC";
+}
 section {
   margin-bottom: 4rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
+  color: var(--text);
+  font-family: var(--heading);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.3;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 p {
-  line-height: 1.8;
-  margin-bottom: 1rem;
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: 400;
+  color: var(--text);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  text-align: justify;
+  
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
-.citations-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.hero-section {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  
+  h1 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-weight: 400;
+    line-height: 28px;
+  }
+  
+  p {
+    // max-width: 800px;
+    margin: 20px 0 20px 0;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: justify;
+  }
+}
+
+.news-section {
+  background: var(--background-alt);
+  // padding: 2rem;
+  border-radius: var(--rounded);
+  // max-width: 800px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  font-family: "PingFang SC";
+  // padding: 20px;
+  .news-section-title {
+    
+    font-family: "PingFang SC";
+    font-weight: 400;
+    line-height: 28px;
+    align-self: center;
+    
+    margin: 20px 30px 10px 30px;
+    // padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .news-section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  // 新闻条目的样式配置
+  .citation-container {
+    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
+  }
+  
+  .citation {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--background);
+    position: relative;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.about-section {
+  padding: 1rem 0;
+  
+  p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: justify;
+    
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+  
+  img {
+    border-radius: var(--rounded);
+    transition: var(--transition);
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.github-section {
+  padding: 1rem 0;
+  text-align: center;
+  
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center;
+  }
+  
+  a {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--rounded);
+    font-weight: 500;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: var(--transition);
+    
+    &:hover {
+      background: #0066aa;
+    }
+  }
+  
+  .github-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #007acc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #007acc;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background: transparent;
+    transition: var(--transition);
+    
+    &:hover {
+      background: #007acc;
+      color: white;
+    }
+  }
+}
+// Responsive design
+@media (max-width: 768px) {
+  .home-page {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-section {
+    // padding: 2rem 1rem;
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  .about-section,
+  .github-section {
+    padding: 1.5rem;
+  }
+  
+  .github-section p {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>

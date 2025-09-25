@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import ResearchView from '../views/ResearchView.vue'
 import TeamView from '../views/TeamView.vue'
 import ProjectsView from '../views/ProjectsView.vue'
+import HiringView from '../views/HiringView.vue'
+import VideoDemoView from '../views/VideoDemoView.vue'
 import BlogView from '../views/BlogView.vue'
 import ContactView from '../views/ContactView.vue'
 
@@ -28,6 +30,16 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: ProjectsView
+    },
+    {
+      path: '/hiring',
+      name: 'hiring',
+      component: HiringView
+    },
+    {
+      path: '/video-demo',
+      name: 'video-demo',
+      component: VideoDemoView
     },
     {
       path: '/blog',
