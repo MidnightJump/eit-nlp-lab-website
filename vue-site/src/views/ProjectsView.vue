@@ -98,10 +98,10 @@ onMounted(async () => {
           <!-- 组合标题：左侧黑到紫的渐变效果，分词可单独控制 -->
           <!-- <h2 class="title-composed">
             <span class="title-left">Vivid&nbsp;--&nbsp;项目名称</span>
-            <!-- <span class="title-sep">&nbsp;--&nbsp;</span>
-            <span class="title-right">项目名称</span> -->
-          <!-- </h2> -->
-          <!-- <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p> --> -->
+            <span class="title-sep">&nbsp;--&nbsp;</span>
+            <span class="title-right">项目名称</span>
+          </h2>
+          <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p> -->
         </div>
       </section>
       <!-- B容器 - 引用图片展示区 -->
@@ -342,6 +342,43 @@ onMounted(async () => {
     /* leading-trim: NONE;  CSS暂不支持leading-trim，忽略 */
     }
   }
+
+
+/* 在舞台上但没有被激活的视频添加蒙版 */
+.el-carousel__item.is-in-stage:not(.is-active) {
+  .video-wrapper {
+    position: relative;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(128, 128, 128, 0.4); /* 灰色蒙版 */
+      z-index: 2;
+      pointer-events: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+/* 当前激活的视频 */
+.el-carousel__item.is-active {
+  .video-wrapper {
+    box-shadow: 0 8px 32px 0 rgba(80, 40, 180, 0.18), 0 1.5px 8px 0 rgba(80, 40, 180, 0.10);
+    border-radius: 12px;
+    position: relative;
+    z-index: 3;
+    transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1);
+    transform: scale(1.24);
+    &::after {
+      display: none; /* 激活状态不显示蒙版 */
+    }
+  }
+}
   .carousel-video-item { height: 100%; }
   .video-wrapper { height: 579px; }      /* 改成你需要的高度 */
   .video-wrapper video {
