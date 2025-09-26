@@ -3,7 +3,7 @@
     class="background" 
     :style="`--image: url('${backgroundImage}')`"
     :data-dark="isDark"
-    :data-big="isHomePage"
+    v-bind="isHomePage ? { 'data-big': '' } : {}"
   >
     <router-link to="/" class="home">
       <span class="logo">
