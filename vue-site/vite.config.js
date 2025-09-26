@@ -12,5 +12,19 @@ export default defineConfig({
   base: '/sys/',
   server: {
     port: 3000
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          element: ['element-plus']
+        }
+      }
+    }
   }
 })

@@ -4,10 +4,7 @@
       <h1>宁波东方理工大学自然语言处理课题组</h1>
       
       <p>
-        我们是<a href="https://www.eitech.edu.cn/" target="_blank">宁波东方理工大学</a>自然语言处理课题组（EIT-NLP）。
-        依托的宁波东方理工大学，坐落于孕育过王阳明、黄宗羲等思想大家与屠呦呦等科学大师的宁波 —— 
-        这座东南沿海的港口名城与历史文化之城。学校以 "服务国家发展、推动社会进步" 为使命，
-        是一所社会力量举办、省市共同建设、国家重点支持的高起点、小而精、创新型、国际化的新型研究型大学。
+        我们是<a href="https://www.eitech.edu.cn/" target="_blank">宁波东方理工大学</a>自然语言处理课题组（EIT-NLP）。依托的宁波东方理工大学，坐落于孕育过王阳明、黄宗羲等思想大家与屠呦呦等科学大师的宁波 —— 这座东南沿海的港口名城与历史文化之城。学校以 "服务国家发展、推动社会进步" 为使命，是一所社会力量举办、省市共同建设、国家重点支持的高起点、小而精、创新型、国际化的新型研究型大学。
       </p>
     </section>
 
@@ -180,21 +177,31 @@ p {
   text-align: center;
   // padding: 2rem 0;
   padding-top: 0px;
-  margin-bottom: 2rem;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 100px;
   
   h1 {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 40px 0;
+    font-family: "Barlow", sans-serif;
+    font-size: 24px;
     font-weight: 400;
-    line-height: 28px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 1.4;
   }
   
   p {
-    // max-width: 800px;
-    margin: 20px 0 20px 0;
     font-size: 16px;
     line-height: 32px;
     text-align: justify;
+    margin: 20px 0;
+    max-width: 1140px;
+    // margin-left: auto;
+    // margin-right: auto;
   }
 }
 
@@ -210,15 +217,16 @@ p {
   font-family: "PingFang SC";
   // padding: 20px;
   .news-section-title {
-    
-    font-family: "PingFang SC";
+    font-family: "Barlow", sans-serif;
+    font-size: 1.6rem;
     font-weight: 400;
-    line-height: 28px;
-    align-self: center;
-    
-    margin: 20px 30px 10px 30px;
-    // padding-bottom: 20px;
-    border-bottom: 1px solid #e0e0e0;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    margin: 40px 0 20px 0;
+    padding-bottom: 5px;
+    border-bottom: solid 1px var(--light-gray, #e0e0e0);
   }
   .news-section-list {
     display: flex;
@@ -248,15 +256,11 @@ p {
   padding: 1rem 0;
   
   p {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 32px;
+    margin: 20px 0;
     text-align: justify;
-    
-    &:last-of-type {
-      margin-bottom: 20px;
-    }
+    line-height: 24px;
+    font-weight: 400;
+    font-family: "PingFang SC";
   }
   
   img {
@@ -337,13 +341,7 @@ p {
     font-size: 1.5rem;
   }
   
-  .hero-section {
-    // padding: 2rem 1rem;
-    
-    p {
-      font-size: 1rem;
-    }
-  }
+
   
   .about-section,
   .github-section {
