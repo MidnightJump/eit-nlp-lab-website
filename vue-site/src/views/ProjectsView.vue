@@ -166,6 +166,35 @@ onMounted(async () => {
               </div>
             </div>
           </div>
+          <div class="content-layout">
+            <div class="container-content-video">
+              <div class="video-wrapper">
+                <video 
+                  ref="mainVideo"
+                  :src="videoSrc"
+                  playsinline
+                  @click="toggleVideo"
+                  @ended="onVideoEnded"
+                ></video>
+                <el-button
+                  class="custom-play-button"
+                  type="primary"
+                  circle
+                  @click.stop="toggleVideo"
+                >
+                  <el-icon :size="56">
+                    <component :is="isVideoPlaying ? VideoPause : VideoPlay" />
+                  </el-icon>
+                </el-button>
+              </div>
+            </div>
+            <div class="container-content-description">
+              <h2>标题 -- 主链路完整系统功能介绍</h2>
+              <p>
+                这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
