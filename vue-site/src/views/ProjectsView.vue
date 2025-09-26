@@ -89,13 +89,19 @@ onMounted(async () => {
       <!-- A容器 - 项目列表 -->
       <section class="a-container">
         <div class="container-header">
+          <img 
+            src="../assets/images/projects/image.png" 
+            alt="项目图片" 
+            class="header-background-image"
+          />
+          
           <!-- 组合标题：左侧黑到紫的渐变效果，分词可单独控制 -->
-          <h2 class="title-composed">
+          <!-- <h2 class="title-composed">
             <span class="title-left">Vivid&nbsp;--&nbsp;项目名称</span>
             <!-- <span class="title-sep">&nbsp;--&nbsp;</span>
             <span class="title-right">项目名称</span> -->
-          </h2>
-          <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p>
+          <!-- </h2> -->
+          <!-- <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p> --> -->
         </div>
       </section>
       <!-- B容器 - 引用图片展示区 -->
@@ -112,7 +118,7 @@ onMounted(async () => {
               arrow="hover"
             >
               <el-carousel-item
-                v-for="(vid, idx) in carouselVideos"
+                v-for="vid in carouselVideos"
                 :key="vid"
               >
                 <div class="carousel-video-item">
@@ -241,14 +247,31 @@ onMounted(async () => {
 
 .a-container{
   width:100%;
-  height: 620px;
+  height: 1240px;
   padding: 0 0 0 0;
   background: #fff;
   .container-header{
+    position: relative;
+    width: 100%;
+    height: 100%;
     padding: 0 0 0 0;
     background: none;
+    overflow: hidden;
+    
+    .header-background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    
     /* 组合标题样式 */
     .title-composed {
+      position: relative;
+      z-index: 2;
       font-family: 'Inter', sans-serif;
       font-weight: 700;
       font-style: bold;
@@ -280,6 +303,8 @@ onMounted(async () => {
       line-height: 1.2;
     }
     p {
+      position: relative;
+      z-index: 2;
       font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
       font-weight: 400;
       font-style: normal;
@@ -312,7 +337,7 @@ onMounted(async () => {
     font-size: 50px !important;
     line-height: 100%;
     letter-spacing: 0;
-    margin-top: 90px;
+    margin-top: 0px;
     margin-bottom: 55px;
     /* leading-trim: NONE;  CSS暂不支持leading-trim，忽略 */
     }
