@@ -394,16 +394,16 @@ onMounted(async () => {
       .container-content-video {
         flex: 6;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        // align-items: center;
+        // justify-content: center;
         // padding: 20px;
         margin-top: 100px;
         .video-wrapper {
           position: relative;
           width: 100%;
           height: 527px;
+          border-radius: 16px;
           // padding-bottom:100px;
-          
           video {
             width: 100%;
             height: 100%;
@@ -419,19 +419,28 @@ onMounted(async () => {
     }
   }
   .content-layout-up{
+    align-items: flex-start !important;
+    // padding-right: 88px !important;
     .container-content-description{
+      margin-top: 0px !important;
       padding-right: 170px !important;
     }
     .container-content-video{
       margin-right: 88px;
+      margin-top: 0px !important;
     }
   }
   .content-layout-down{
+    align-items: flex-start !important;
+    margin-top: 100px !important;
     .container-content-description{
       padding-left: 170px !important;
       margin-bottom: 100px !important;
+      padding-right: 88px !important;
     }
     .container-content-video{
+      margin-top: 0px !important;
+
       margin-bottom: 100px !important;
       margin-left: 88px;
     }
