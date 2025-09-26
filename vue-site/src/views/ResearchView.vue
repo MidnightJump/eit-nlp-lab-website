@@ -86,7 +86,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import Citation from '../components/Citation.vue'
-import { getAllPapers } from '../data/papers'
+import { allPapers } from '../data/papers_new'
 
 const papers = ref([])
 const loading = ref(true)
@@ -126,7 +126,9 @@ const clearSearch = () => {
 
 onMounted(async () => {
   try {
-    papers.value = await getAllPapers()
+    // 模拟异步加载以保持加载状态
+    await new Promise(resolve => setTimeout(resolve, 500))
+    papers.value = allPapers
   } catch (error) {
     console.error('Failed to load papers:', error)
   } finally {

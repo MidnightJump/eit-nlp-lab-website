@@ -86,123 +86,125 @@ onMounted(async () => {
 
     <!-- 主容器 -->
     <main class="main-container">
-      <!-- A容器 - 项目列表 -->
-      <section class="a-container">
-        <div class="container-header">
-          <img 
-            src="../assets/images/projects/image.png" 
-            alt="项目图片" 
-            class="header-background-image"
-          />
-          
-          <!-- 组合标题：左侧黑到紫的渐变效果，分词可单独控制 -->
-          <!-- <h2 class="title-composed">
-            <span class="title-left">Vivid&nbsp;--&nbsp;项目名称</span>
-            <span class="title-sep">&nbsp;--&nbsp;</span>
-            <span class="title-right">项目名称</span>
-          </h2>
-          <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p> -->
-        </div>
-      </section>
-      <!-- B容器 - 引用图片展示区 -->
-      <section class="b-container">
-        <div class="container-header">
-          <h2>标题 -- 短视频滑动区</h2>
-        </div>
-          <div class="container-content">
-            <el-carousel 
-              :interval="4000" 
-              type="card" 
-              height="480px"
-              indicator-position="outside"
-              arrow="hover"
-            >
-              <el-carousel-item
-                v-for="vid in carouselVideos"
-                :key="vid"
+      <div class="content-wrapper">
+        <!-- A容器 - 项目列表 -->
+        <section class="a-container">
+          <div class="container-header">
+            <img 
+              src="../assets/images/projects/image.png" 
+              alt="项目图片" 
+              class="header-background-image"
+            />
+            
+            <!-- 组合标题：左侧黑到紫的渐变效果，分词可单独控制 -->
+            <!-- <h2 class="title-composed">
+              <span class="title-left">Vivid&nbsp;--&nbsp;项目名称</span>
+              <span class="title-sep">&nbsp;--&nbsp;</span>
+              <span class="title-right">项目名称</span>
+            </h2>
+            <p>这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介，这里是项目简介。</p> -->
+          </div>
+        </section>
+        <!-- B容器 - 引用图片展示区 -->
+        <section class="b-container">
+          <div class="container-header">
+            <h2>标题 -- 短视频滑动区</h2>
+          </div>
+            <div class="container-content">
+              <el-carousel 
+                :interval="4000" 
+                type="card" 
+                height="480px"
+                indicator-position="outside"
+                arrow="hover"
               >
-                <div class="carousel-video-item">
-                  <div class="video-wrapper">
-                    <video 
-                      :src="vid"
-                      controls
-                      playsinline
-                    ></video>
+                <el-carousel-item
+                  v-for="vid in carouselVideos"
+                  :key="vid"
+                >
+                  <div class="carousel-video-item">
+                    <div class="video-wrapper">
+                      <video 
+                        :src="vid"
+                        controls
+                        playsinline
+                      ></video>
+                    </div>
                   </div>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
+        </section>
+
+
+
+        <!-- C容器 - 额外内容区 -->
+        <section class="c-container">
+          <!-- <div class="container-header">
+            <h2>标题 -- 主链路完整系统功能介绍</h2>
+          </div> -->
+          <div class="container-content">
+            <div class="content-layout-up">
+              <div class="container-content-description">
+                <h2>标题 -- 主链路完整系统功能介绍</h2>
+                <p>
+                  这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
+                </p>
+              </div>
+              <div class="container-content-video">
+                <div class="video-wrapper">
+                  <video 
+                    ref="mainVideo"
+                    :src="videoSrc"
+                    playsinline
+                    @click="toggleVideo"
+                    @ended="onVideoEnded"
+                  ></video>
+                  <el-button
+                    class="custom-play-button"
+                    type="primary"
+                    circle
+                    @click.stop="toggleVideo"
+                  >
+                    <el-icon :size="56">
+                      <component :is="isVideoPlaying ? VideoPause : VideoPlay" />
+                    </el-icon>
+                  </el-button>
                 </div>
-              </el-carousel-item>
-            </el-carousel>
-          </div>
-      </section>
-
-
-
-      <!-- C容器 - 额外内容区 -->
-      <section class="c-container">
-        <!-- <div class="container-header">
-          <h2>标题 -- 主链路完整系统功能介绍</h2>
-        </div> -->
-        <div class="container-content">
-          <div class="content-layout-up">
-            <div class="container-content-description">
-              <h2>标题 -- 主链路完整系统功能介绍</h2>
-              <p>
-                这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
-              </p>
+              </div>
             </div>
-            <div class="container-content-video">
-              <div class="video-wrapper">
-                <video 
-                  ref="mainVideo"
-                  :src="videoSrc"
-                  playsinline
-                  @click="toggleVideo"
-                  @ended="onVideoEnded"
-                ></video>
-                <el-button
-                  class="custom-play-button"
-                  type="primary"
-                  circle
-                  @click.stop="toggleVideo"
-                >
-                  <el-icon :size="56">
-                    <component :is="isVideoPlaying ? VideoPause : VideoPlay" />
-                  </el-icon>
-                </el-button>
+            <div class="content-layout-down">
+              <div class="container-content-video">
+                <div class="video-wrapper">
+                  <video 
+                    ref="mainVideo"
+                    :src="videoSrc"
+                    playsinline
+                    @click="toggleVideo"
+                    @ended="onVideoEnded"
+                  ></video>
+                  <el-button
+                    class="custom-play-button"
+                    type="primary"
+                    circle
+                    @click.stop="toggleVideo"
+                  >
+                    <el-icon :size="56">
+                      <component :is="isVideoPlaying ? VideoPause : VideoPlay" />
+                    </el-icon>
+                  </el-button>
+                </div>
+              </div>
+              <div class="container-content-description">
+                <h2>标题 -- 主链路完整系统功能介绍</h2>
+                <p>
+                  这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
+                </p>
               </div>
             </div>
           </div>
-          <div class="content-layout-down">
-            <div class="container-content-video">
-              <div class="video-wrapper">
-                <video 
-                  ref="mainVideo"
-                  :src="videoSrc"
-                  playsinline
-                  @click="toggleVideo"
-                  @ended="onVideoEnded"
-                ></video>
-                <el-button
-                  class="custom-play-button"
-                  type="primary"
-                  circle
-                  @click.stop="toggleVideo"
-                >
-                  <el-icon :size="56">
-                    <component :is="isVideoPlaying ? VideoPause : VideoPlay" />
-                  </el-icon>
-                </el-button>
-              </div>
-            </div>
-            <div class="container-content-description">
-              <h2>标题 -- 主链路完整系统功能介绍</h2>
-              <p>
-                这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍，这里是系统功能介绍。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
     
     <!-- 图片模态框 -->
@@ -238,11 +240,20 @@ onMounted(async () => {
 .main-container {
   flex: 1;
   max-width: 100%;
-  margin: 0 auto;
+  // margin: 0 146px;
   // padding: 40px 20px;
   display: flex;
   flex-direction: column;
+}
+
+// 内容包装器
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
   gap: 90px;
+  width: auto;
+  height: 100%;
+  margin: 0 146px;
 }
 
 .a-container{
@@ -262,7 +273,7 @@ onMounted(async () => {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
+      width: auto;
       height: 100%;
       object-fit: cover;
       z-index: 1;
@@ -529,7 +540,7 @@ onMounted(async () => {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 5; // 降低z-index，确保不遮挡header
     
     &:hover {
       background: transparent;

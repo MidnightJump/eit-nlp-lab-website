@@ -23,6 +23,13 @@ export default defineConfig({
         manualChunks: {
           vendor: ['vue', 'vue-router'],
           element: ['element-plus']
+        },
+        assetFileNames: (assetInfo) => {
+          // 保持图片文件的原始路径结构
+          if (assetInfo.name && /\.(png|jpe?g|svg|gif|webp)$/i.test(assetInfo.name)) {
+            return 'src/assets/images/[name].[ext]'
+          }
+          return 'assets/[name]-[hash].[ext]'
         }
       }
     }
