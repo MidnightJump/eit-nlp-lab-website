@@ -137,7 +137,7 @@ onMounted(async () => {
           <h2>标题 -- 主链路完整系统功能介绍</h2>
         </div> -->
         <div class="container-content">
-          <div class="content-layout">
+          <div class="content-layout-up">
             <div class="container-content-description">
               <h2>标题 -- 主链路完整系统功能介绍</h2>
               <p>
@@ -166,7 +166,7 @@ onMounted(async () => {
               </div>
             </div>
           </div>
-          <div class="content-layout">
+          <div class="content-layout-down">
             <div class="container-content-video">
               <div class="video-wrapper">
                 <video 
@@ -353,9 +353,15 @@ onMounted(async () => {
   .container-content {
     height: 100%;
     // padding-left:88px;
-    .content-layout{
+    .content-layout-up,
+    .content-layout-down{
+      display: flex;
+      height: 100%;
+      align-items: center;
       .container-content-description{
         // margin-left: 88px;
+        flex: 4;
+        padding: 0px 100px 0px 88px;
         h2 {    
           font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
           font-weight: 500;
@@ -396,7 +402,7 @@ onMounted(async () => {
           position: relative;
           width: 100%;
           height: 527px;
-          padding-bottom:100px;
+          // padding-bottom:100px;
           
           video {
             width: 100%;
@@ -411,45 +417,26 @@ onMounted(async () => {
         }
       }
     }
-
-
   }
-  
-  .content-layout {
-    display: flex;
-    height: 100%;
-    align-items: center;
-  }
-  
-  .container-content-description{
-    flex: 4;
-    padding: 0px 100px 88px 88px;
-  }
-  
-  .container-content-video {
-    flex: 6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .video-wrapper {
-    position: relative;
-    width: 100%;
-    height: 527px;
-    padding-bottom:100px;
-    
-    video {
-      width: 100%;
-      height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      background: #000;
-      cursor: pointer;
+  .content-layout-up{
+    .container-content-description{
+      padding-right: 170px !important;
+    }
+    .container-content-video{
+      margin-right: 88px;
     }
   }
+  .content-layout-down{
+    .container-content-description{
+      padding-left: 170px !important;
+      margin-bottom: 100px !important;
+    }
+    .container-content-video{
+      margin-bottom: 100px !important;
+      margin-left: 88px;
+    }
+  }
+  
   
   .custom-play-button {
     position: absolute;
@@ -477,10 +464,6 @@ onMounted(async () => {
       background: transparent;
       transform: scale(1.05);
     }
-    
-    // .el-icon {
-    //   font-size: 22px;
-    // }
   }
 }
 
